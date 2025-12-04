@@ -61,7 +61,51 @@ class Agenda:
     def __init__(self):
         self.__contacts: list[Contact] = []
         
-    def __findPosByName(self)
+    def __findPosByName(self, name: str) -> int:
+        for i, contact in enumerate(self.__contacts):
+            if contact.getName() == name:
+                return i
+            return -1
+        
+    def addContact(self, name: str, str, fones: list[list[str]]):
+        pos = self.__findPosByName
+
+        if pos == -1:
+            contact = Contact(name)
+            for fone_list in fones:
+                id = fone_list[0]
+                number = fone_list[1]
+                contact.addFone(id, number)
+            self.__contacts.append(contact)
+            self.__contacts.sort(key = lambda c: c.getName())
+        else:
+            contact = self.__contacts[pos]
+            for fone_list in fones:
+                id = fone_list[0]
+                number = fone_list[1]
+                contact.addFone(id, number)
+
+    def getContact(self, name: str):
+        pos = self.__findPosByName(name)
+        return self.__contacts[pos] if pos != -1 else None
+    
+    def rmContact(self, name: str):
+        pos = self.__findPosByName(name)
+        if pos != -1:
+            self.__contacts.pop(pos)
+
+    def search(self, pattern: str) -> list[Contact]:
+        results: list[Contact] = []
+        pattern_lower: str = pattern. lower()
+        for contact in self.__contacts:
+            if pattern_lower in contact.getName().lower():
+                results.append(contact)
+                continue
+            for fone in contact.getFones():
+                
+    
+
+
 
 
 def main():
